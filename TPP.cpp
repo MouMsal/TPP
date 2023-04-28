@@ -3,8 +3,20 @@
 #include <iostream>
 
 //class DataTypes;
-class Memory;
+
 class Integer;
+
+class Memory{
+private:
+    static int address1;
+    int value;
+public:
+    Memory(int val,int address);
+    void allocateMemory(int val,int &address);
+    int getNum();
+};
+int Memory::address1 = 0;
+
 
 class CPU{
 private:
@@ -17,8 +29,10 @@ public:
         regn = memory[address1]; //need to fix these so that it allocates   memory and creates an address.
     }
     void store(int reg1,int address1){
-        //Locate
-        memory[address1] = reg1;
+            memory[address1] = reg1;
+
+
+
 //       memory.push_back(reg1);
     }
 
@@ -33,29 +47,25 @@ public:
 
     void jump(){
     }
+    void find(int address1){
+    }
 };
 CPU oneCPU;
 
-class Memory{
-private:
-    static int address1;
+Memory::Memory(int value,int address)
+{
+    address1++;
+    address = address1;
+    oneCPU.store(value,address1);
+}
 
-public:
-    Memory(int value,int address)
-    {
-        address1++;
-        address = address1;
-        oneCPU.store(value,address1);
-    }
+void Memory::allocateMemory(int value,int &address){
+    address1++;
+    address = address1;
+    oneCPU.store(value,address1);
+}
 
-    void allocateMemory(int value,int &address){
-        address1++;
-        address = address1;
-        oneCPU.store(value,address1);
-    }
-
-};
-int Memory::address1 = 0;
+int Memory::getNum(){return value;}
 
 //Memory oneMemory;
 namespace tpp{
@@ -94,6 +104,9 @@ int main(){
     int x = 4;
 
     int y = 34;
+
+
+
     float t = 23.231;
     int z;
     Integer test1 =25;
