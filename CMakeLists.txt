@@ -3,5 +3,4 @@ project(TPP)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(TPP
-        TPP.cpp)
+add_executable(TPP TPP.cpp CPU.cpp CPU.h Memory.cpp Memory.h)
