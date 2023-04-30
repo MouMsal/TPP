@@ -6,14 +6,17 @@
 class Memory{
 
 private:
-    static size_t address1; //Learned to use siez_t from chatgpt
+    static size_t address1; //Learned to use size_t from chatgpt
     std::vector<char>register1;
-
     int value;
+
 public:
-    Memory(int val,size_t& address);
+//    Memory(int val,size_t& address);
+    ~Memory();
     Memory();
-//    void allocateMemory(int val,int &address);
+
+    template <class T>
+    void allocateMemory(T val, size_t &address);
     template<class T> T& getVal(size_t address);
     //Add a resize function
     //Add a set func

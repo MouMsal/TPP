@@ -9,10 +9,11 @@ extern CPU oneCPU;
 
 //class DataTypes;
 
+
+Memory memBuffer;
+
 class Integer;
 
-
-//Memory oneMemory;
 namespace tpp {
     template<class T>
     T add(T val1, T val2) {
@@ -24,8 +25,8 @@ namespace tpp {
     void disp(T val) {
         std::cout << val;
     }
+    std::string newline = "\n";
 }
-
 class Integer{
     friend void operator<<(std::ostream& o, Integer i);
 //    friend Integer operator+(Integer one,Integer two);
@@ -38,21 +39,52 @@ protected:
     size_t address;
 public:
     Integer(int i):val(i) {
-        Memory mainMem(val,address);
+        memBuffer.allocateMemory(val,address);
+        std::cout<<"\n"<<address;
     }
     Integer(){}
-
-    //Memory mainMem(val); Put this in the overloaded = op later;
+    Integer& operator=(int val1){
+        this->val = val1;
+        return *this;}
 };
 
+class Decimal {
+//    template <class T>
+//    friend void operator<<(std::ostream& o, T i);
+    template <class T>
+    friend T operator+(T one, T two);
+    template <class T>
+    friend T operator-(T one, T two);
+
+protected:
+    float val;
+    size_t address;
+
+public:
+    Decimal(float f) : val(f) {
+        memBuffer.allocateMemory(val, address);}
+    Decimal() {}
+
+    Decimal& operator=(float val1){
+        this->val = val1;
+        return *this;}
+};
+
+
 int main(){
+
     Integer test1 = 25;
     Integer test2 = 30;
     Integer test3 = 4;
-    test3 = (test1 + test2);
-    tpp::disp(test1);
 
-    //    tpp::disp(test2);
+    Decimal test4 = 32.24;
+    test4 = 23.12;
+    test2 = 5;
+    test3 = (test1 + test2);
+
+//    tpp::disp(test4);
+//    tpp::disp(tpp::newline);
+    tpp::disp(test2);
 
 //    test2 = test1 - test2;
 //    z = tpp::add(test1,test2);

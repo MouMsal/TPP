@@ -11,8 +11,6 @@ Memory mainMem;
 
 template <class T>
 T CPU::load(T address1){
-    regn = memory[address1]; //need to fix these so that it allocates   memory and creates an address.
-
     regn = mainMem.getVal<T>(address1);
     return regn;
 }
@@ -20,10 +18,9 @@ T CPU::load(T address1){
 
 template <class T>
 void CPU::store(T reg1,size_t address1){
-    mainMem.resize(65535);
-        mainMem.getVal<T>(address1) = reg1;
-}
 
+    mainMem.getVal<T>(address1) = reg1;
+}
 
 template <class T>
 T CPU::add(T reg1, T reg2){ //Return something if it's not a reference;
