@@ -32,6 +32,7 @@ T& Memory::getVal(size_t address){ //Returns a reference but after casting
 }
 
 
+
 void Memory::resize(size_t size) {
     register1.resize(size);
 }

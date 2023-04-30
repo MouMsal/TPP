@@ -40,7 +40,7 @@ protected:
 public:
     Integer(int i):val(i) {
         memBuffer.allocateMemory(val,address);
-        std::cout<<"\n"<<address;
+//        std::cout<<"\n"<<address;
     }
     Integer(){}
     Integer& operator=(int val1){
@@ -81,7 +81,8 @@ int main(){
     test4 = 23.12;
     test2 = 5;
     test3 = (test1 + test2);
-
+    tpp::disp(tpp::newline);
+    tpp::disp(oneCPU.multiply(3.13,2.4));
 //    tpp::disp(test4);
 //    tpp::disp(tpp::newline);
     tpp::disp(test2);
