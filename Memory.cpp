@@ -22,7 +22,7 @@ Memory::Memory(){
 void Memory::allocateMemory(T val, size_t &address){
     address1++;
     address = address1;
-    oneCPU.store(value,address1);
+    oneCPU.store(val,address1);
 
 }
 template <class T>

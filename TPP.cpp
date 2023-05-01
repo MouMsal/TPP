@@ -45,6 +45,8 @@ public:
     Integer(){}
     Integer& operator=(int val1){
         this->val = val1;
+//        std::cout<<oneCPU.load<float>(address);
+
         return *this;}
 };
 
@@ -62,30 +64,37 @@ protected:
 
 public:
     Decimal(float f) : val(f) {
-        memBuffer.allocateMemory(val, address);}
+        std::cout<<val;
+        memBuffer.allocateMemory(val, address);
+
+//        std::cout<<"\n"<<address;
+    }
     Decimal() {}
 
     Decimal& operator=(float val1){
         this->val = val1;
+        oneCPU.load<float>(address);
+
         return *this;}
 };
 
 
 int main(){
 
-    Integer test1 = 25;
-    Integer test2 = 30;
-    Integer test3 = 4;
-
+//    Integer test1 = 25;
+//    Integer test2 = 30;
     Decimal test4 = 32.24;
+//    Integer test3 = 4;
+
     test4 = 23.12;
-    test2 = 5;
-    test3 = (test1 + test2);
-    tpp::disp(tpp::newline);
-    tpp::disp(oneCPU.multiply(3.13,2.4));
+//    test2 = 5;
+//    test3 = (test1 + test2);
+//    tpp::disp(tpp::newline);
+
+//    tpp::disp(oneCPU.multiply(3.13,2.4));
 //    tpp::disp(test4);
 //    tpp::disp(tpp::newline);
-    tpp::disp(test2);
+//    tpp::disp(test2);
 
 //    test2 = test1 - test2;
 //    z = tpp::add(test1,test2);

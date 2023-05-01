@@ -7,6 +7,7 @@
 #include <map>
 #include <cstddef>
 #include <vector>
+#include <iostream>
 class CPU{
 
 private:
@@ -21,7 +22,7 @@ public:
 //    using Instruction = void (CPU::*)();//chat
 
     template<class T>
-    T load(T address1);
+    T load(size_t address1);
     template <class T>
     void store(T reg1, size_t address1);
 
@@ -41,6 +42,8 @@ public:
 //    void multiply(T val, T val2);
 
     static float multiply(float val, float val2);
+
+    static float divide(float val, float val2);
 };
 
 

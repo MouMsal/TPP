@@ -8,7 +8,7 @@ class Memory{
 private:
     static size_t address1; //Learned to use size_t from chatgpt
     std::vector<char>register1;
-    int value;
+//    int value;
 
 public:
 //    Memory(int val,size_t& address);
