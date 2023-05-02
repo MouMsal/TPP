@@ -14,7 +14,7 @@ Memory mainMem;
 template <class T>
 T CPU::load(size_t address1){
     regn = mainMem.getVal<T>(address1);
-    std::cout<<"\n"<<address1;
+
     return regn;
 }
 
@@ -22,7 +22,7 @@ T CPU::load(size_t address1){
 template <class T>
 void CPU::store(T reg1,size_t address1){
     mainMem.getVal<T>(address1) = reg1;
-    std::cout<<"\n"<<address1;
+
 //    std::cout<<"\n"<<regn;
 }
 

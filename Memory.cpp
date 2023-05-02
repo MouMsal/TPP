@@ -19,7 +19,7 @@ Memory::Memory(){resize(100);}
 
 template <class T>
 void Memory::allocateMemory(T val, size_t &address){
-    address1++;
+    address1 += sizeof(T);
     address = address1;
 //    std::cout<<"\n"<<val;
     oneCPU.store(val,address1);

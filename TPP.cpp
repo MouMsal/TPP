@@ -35,6 +35,8 @@ class Integer{
     friend T operator-(T one,T two);
     template <class T>
     friend T operator*(T one,T two);
+    template <class T>
+    friend T operator/(T one,T two);
 
         public:
     int val;
@@ -43,7 +45,6 @@ public:
     Integer(int i):val(i) {
         address =0;
         memBuffer.allocateMemory(val,address); //Perhaps turn it into CPU later.
-        std::cout<<"hello";
 
 //        std::cout<<"\n"<<address;
     }
@@ -60,7 +61,6 @@ public:
     Integer& operator=(Integer val1){
 
         this->val = val1.val;
-        std::cout<<"hello";
 
         oneCPU.store(val,address);
 //        std::cout<<oneCPU.load<float>(address);
@@ -77,6 +77,8 @@ class Decimal {
     friend T operator-(T one, T two);
     template <class T>
     friend T operator*(T one,T two);
+    template <class T>
+    friend T operator/(T one,T two);
 
 protected:
     float val;
@@ -113,17 +115,15 @@ int main(){
 //    test4 = 23.12;
 //    test3 = 23 + 2;
 
-    test3 =  test2 + test3;
-//    std::cout<<"\n"<<test3;
+    test3 =  test2 / test3; ///No conversions yet made for any arithmetics
+    tpp::disp(test3);
 
+    int x = 30;
+    if(x == 30){
+        std::cout<<"hello";
+    }
+    else std::cout<<"Bob";
 
-//    test1 = test2 * test3;
-//    std::cout<<(test2*test3);
-//    std::cout<<oneCPU.multiply(30,4);
-//    test2 = 5;
-//    tpp::disp(tpp::newline);
-
-//    tpp::disp(oneCPU.multiply(3.13,2.4));
 //    tpp::disp(test4);
 //    tpp::disp(tpp::newline);
 //    tpp::disp(test2);
@@ -140,9 +140,7 @@ void operator<<(std::ostream& o, Integer i){o<<i.val;}
 template <class T>
 T operator+(T one,T two){
 //    T three = 0;
-    std::cout<<"\n____";
-    oneCPU.load<typeof(one.val)>(one.address);
-    std::cout<<"\n____";
+
     //    std::cout<<two.address;
     typeof(one.val) three;
 
@@ -167,14 +165,22 @@ template <class T>
 T operator*(T one,T two){
 
     T three;
-//    std::cout<<"\n"<<oneCPU.load<typeof(one.val)>(one.address);
-
 
     three.val = oneCPU.multiply(oneCPU.load<typeof(one.val)>(one.address)
             ,oneCPU.load<typeof(two.val)>(two.address));
 
-//    std::cout<<three.val;
-    //Looks stupid but trying pretend to use a cpu.
-    return static_cast<typeof(one.val)>(three.val);
+
+    return static_cast<typeof(one.val)>(three);
 }
 
+template <class T>
+T operator/(T one,T two){
+
+    float three;
+    static_cast<float>(oneCPU.template load<typeof(one.val)>(one.address));
+    three = oneCPU.divide(static_cast<float>(oneCPU.template load<typeof(one.val)>(one.address))
+            ,static_cast<float>(oneCPU.load<typeof(two.val)>(two.address)));
+
+
+    return three;
+}
