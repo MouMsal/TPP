@@ -15,17 +15,16 @@ Memory memBuffer;
 class Integer;
 
 namespace tpp {
-    template<class T>
-    T add(T val1, T val2) {
 
-        return 1;
-    }
 
     template<class T>
     void disp(T val) {
         std::cout << val;
     }
     std::string newline = "\n";
+
+
+
 }
 class Integer{
     friend void operator<<(std::ostream& o, Integer i);
@@ -34,17 +33,36 @@ class Integer{
     friend T operator+(T one,T two);
     template <class T>
     friend T operator-(T one,T two);
-protected:
+    template <class T>
+    friend T operator*(T one,T two);
+
+        public:
     int val;
     size_t address;
 public:
     Integer(int i):val(i) {
-        memBuffer.allocateMemory(val,address);
+        address =0;
+        memBuffer.allocateMemory(val,address); //Perhaps turn it into CPU later.
+        std::cout<<"hello";
+
 //        std::cout<<"\n"<<address;
     }
     Integer(){}
     Integer& operator=(int val1){
         this->val = val1;
+
+        oneCPU.store(val,address);
+
+//        std::cout<<oneCPU.load<float>(address);
+
+        return *this;}
+
+    Integer& operator=(Integer val1){
+
+        this->val = val1.val;
+        std::cout<<"hello";
+
+        oneCPU.store(val,address);
 //        std::cout<<oneCPU.load<float>(address);
 
         return *this;}
@@ -57,6 +75,8 @@ class Decimal {
     friend T operator+(T one, T two);
     template <class T>
     friend T operator-(T one, T two);
+    template <class T>
+    friend T operator*(T one,T two);
 
 protected:
     float val;
@@ -64,7 +84,7 @@ protected:
 
 public:
     Decimal(float f) : val(f) {
-        std::cout<<val;
+//        std::cout<<val;
         memBuffer.allocateMemory(val, address);
 
 //        std::cout<<"\n"<<address;
@@ -73,8 +93,12 @@ public:
 
     Decimal& operator=(float val1){
         this->val = val1;
-        oneCPU.load<float>(address);
+        oneCPU.store(val,address);
+        return *this;}
 
+    Decimal& operator=(Decimal val1){
+        this->val = val1.val;
+        oneCPU.store(val,address);
         return *this;}
 };
 
@@ -82,13 +106,21 @@ public:
 int main(){
 
 //    Integer test1 = 25;
-//    Integer test2 = 30;
-    Decimal test4 = 32.24;
-//    Integer test3 = 4;
+    Integer test2 = 30;
+//    Decimal test4 = 32.24;
+    Integer test3 = 4;
 
-    test4 = 23.12;
+//    test4 = 23.12;
+//    test3 = 23 + 2;
+
+    test3 =  test2 + test3;
+//    std::cout<<"\n"<<test3;
+
+
+//    test1 = test2 * test3;
+//    std::cout<<(test2*test3);
+//    std::cout<<oneCPU.multiply(30,4);
 //    test2 = 5;
-//    test3 = (test1 + test2);
 //    tpp::disp(tpp::newline);
 
 //    tpp::disp(oneCPU.multiply(3.13,2.4));
@@ -99,7 +131,7 @@ int main(){
 //    test2 = test1 - test2;
 //    z = tpp::add(test1,test2);
 
-    std::cout<<"\n";
+
 
 }
 
@@ -107,21 +139,42 @@ void operator<<(std::ostream& o, Integer i){o<<i.val;}
 
 template <class T>
 T operator+(T one,T two){
-    //I will need to replace with CPU add soon.
+//    T three = 0;
+    std::cout<<"\n____";
+    oneCPU.load<typeof(one.val)>(one.address);
+    std::cout<<"\n____";
+    //    std::cout<<two.address;
+    typeof(one.val) three;
 
-    T three;
-    three.val = oneCPU.add(one.val,two.val);
-    return three.val;
+    three = oneCPU.add(oneCPU.load<typeof(one.val)>(one.address)
+            ,(oneCPU.load<typeof(two.val)>(two.address)));
+
+    return three;
 
 }
-
 
 template <class T>
 T operator-(T one,T two){
-    //I will need to replace with CPU add soon.
-    T three;
+    typeof(one.val) three;
 
-    three.val = oneCPU.add(oneCPU.load(one.address),-(oneCPU.load(two.address)));
+    three = oneCPU.add(oneCPU.load<typeof(one.val)>(one.address)
+            ,-(oneCPU.load<typeof(one.val)>(two.address)));
     //Looks stupid but trying pretend to use a cpu.
     return three.val;
 }
+
+template <class T>
+T operator*(T one,T two){
+
+    T three;
+//    std::cout<<"\n"<<oneCPU.load<typeof(one.val)>(one.address);
+
+
+    three.val = oneCPU.multiply(oneCPU.load<typeof(one.val)>(one.address)
+            ,oneCPU.load<typeof(two.val)>(two.address));
+
+//    std::cout<<three.val;
+    //Looks stupid but trying pretend to use a cpu.
+    return static_cast<typeof(one.val)>(three.val);
+}
+

@@ -11,10 +11,9 @@
 class CPU{
 
 private:
-//    std::map<int,int>memory;
-//    std::vector<Instruction> instructions;
-    double regn;
-    int fregn;
+    //    std::vector<Instruction> instructions;
+double regn;
+
 
 
 public:
@@ -41,9 +40,9 @@ public:
 
 //    void multiply(T val, T val2);
 
-    static float multiply(float val, float val2);
+    template <class T> T multiply(T val, T val2);
 
-    static float divide(float val, float val2);
+    float divide(float val, float val2);
 };
 
 

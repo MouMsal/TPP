@@ -15,23 +15,22 @@ size_t Memory::address1 = 0;
 //    oneCPU.store(value,address1);
 //}
 
-Memory::Memory(){
-    resize(100);}
+Memory::Memory(){resize(100);}
 
-    template <class T>
+template <class T>
 void Memory::allocateMemory(T val, size_t &address){
     address1++;
     address = address1;
+//    std::cout<<"\n"<<val;
     oneCPU.store(val,address1);
-
 }
+
 template <class T>
+//Thank you to stackExchange for this clever method.
 T& Memory::getVal(size_t address){ //Returns a reference but after casting
     return *(T*)(register1.data()+ address) ;//Points to the first element then indexes. Casts to the correct type.
     // Data points to first element.
 }
-
-
 
 void Memory::resize(size_t size) {
     register1.resize(size);
