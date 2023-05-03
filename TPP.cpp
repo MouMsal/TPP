@@ -35,19 +35,25 @@ namespace tpp {
     }
     std::string newline = "\n";
 
-    class Input { 
+    class InputGPT{ //By Mr.GPT
     public:
         template<typename T>
         InputGPT& operator>>(T& value) {
             std::string input_str;
             std::getline(std::cin, input_str);
+
             std::istringstream stream(input_str);
+
+            typeof(value.val) data;
+            stream >> data;
+
+            value = data;
             std::cout<<value.address;
-            stream >> value.val;
+//            std::cout<<value.val;
             return *this;
         }
     };
-    class Output { 
+    class Output { //Made my own version of the above for output
     public:
         template<typename T>
         Output& operator<<(const T& value) {
@@ -57,7 +63,6 @@ namespace tpp {
             return *this;
         }
     };
-
     Output output;
 
 
@@ -69,6 +74,8 @@ namespace tpp {
 }
 class Integer{
     friend class InputGPT;
+//    template <class T>
+//    friend std::istream& operator>>(std::istream& in, T& i);
     template <class T>
     friend bool operator!=(T one, T two);
     template <class T, class D>
@@ -90,15 +97,16 @@ class Integer{
     friend T operator/(T one,T two);
 
         public:
-    int val;
-    size_t address;
+    int val = 0;
+    size_t address = 0;
 public:
     Integer(int i):val(i) {
-        address =0;
         memBuffer.allocateMemory(val,address);
     }
 
-    Integer(){}
+    Integer(){
+        memBuffer.allocateMemory(val, address);
+    }
     Integer& operator=(int val1){
         this->val = val1;
         oneCPU.store(val,address);
@@ -108,7 +116,6 @@ public:
         this->val = val1.val;
         oneCPU.store(val,address);
         return *this;}
-
 };
 
 class Decimal {
@@ -139,7 +146,9 @@ public:
     Decimal(float f) : val(f) {
         memBuffer.allocateMemory(val, address);
     }
-    Decimal() {}
+    Decimal() {
+        memBuffer.allocateMemory(val, address);
+    }
     Decimal& operator=(float val1){
         this->val = val1;
         oneCPU.store(val,address);
@@ -178,9 +187,9 @@ public:
     PreciseDecimal(double d) : val(d) {
         memBuffer.allocateMemory(val, address);
     }
-
-    PreciseDecimal() {}
-
+    PreciseDecimal() {
+        memBuffer.allocateMemory(val, address);
+    }
     PreciseDecimal& operator=(double val1) {
         this->val = val1;
         oneCPU.store(val,address);
@@ -198,22 +207,23 @@ public:
 
 int main() {
 
-    Integer month;
-    Integer year;
-    Integer day;
-    Decimal money;
-    PreciseDecimal pi;
+    Integer month = 0;
+    Integer year = 0;
+    Integer day = 0;
+    Decimal money = 0;
+    PreciseDecimal pi = 0;
     using namespace tpp;
 
 
     Integer x = 12;
+    input >> x;
     if(x == 0 ){std::cout<<"bob";
     }else std::cout<<"hi";
 
-/*
+
     disp("What day were you born on?(1-31)");
-    disp(newline);
     input >> day;
+
     disp("What month were you born on?(1-12)");
     input >> month;
     disp(newline);
@@ -249,12 +259,14 @@ int main() {
     tppELSEIF (month == 12)
         output << "\nYour birthday,December " << day << ", " << year;
     tppELSE
-        output<<"\nNot a month!";
+        output<<"\nNot a month!\n";
     END
 
-    tppIF(((year%4==0 && year%100!=0)||year%400==0)) output<<"is a leap year.";
-    tppELSE output<<"is not a leap year";
+    tppIF(((year%4==0 && year%100!=0)||year%400==0)) output<<" is a leap year.";
+    tppELSE output<<" is not a leap year";
     END
+
+    /*
 //    test3 =  test2 / test3; ///No conversions yet made for any arithmetics
 //    tpp::disp(test3);*/
 
@@ -320,7 +332,6 @@ tpp::Output& operator<<(tpp::Output& o, const T &i) {
     o << i.val;
     return o;
 }
-
 
 template <class T>
 bool operator==(T one, T two){
