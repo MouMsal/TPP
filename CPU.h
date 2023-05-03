@@ -43,6 +43,9 @@ public:
     template <class T> T multiply(T val, T val2);
 
     float divide(float val, float val2);
+
+    template<class T>
+    int modulo(T val, T num);
 };
 
 

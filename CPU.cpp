@@ -69,6 +69,10 @@ float CPU::divide(float val, float val2){
 
     return (val/val2);
 }
+template <class T>
+int CPU::modulo(T val,T num){
+    return (val%num);
+}
 
 void CPU::jump(){
 
@@ -87,10 +91,26 @@ template double CPU::add<double>(double, double);
 template int CPU::multiply(int val, int val2);
 template float CPU::multiply(float val, float val2);
 template double CPU::multiply(double val, double val2);
+template int CPU::modulo<int>(int val,int num);
+
+enum OPcode {
+    ADD = 1,
+    SUB = 2,
+    MUL = 3,
+    DIV = 4,
+    JMP = 5,
+    JZ = 6,
+    JNZ = 7,
+    LOAD = 8,
+    STORE = 9,
+    HLT = 10
+};
 
 struct Intructions{
 
-    //opcode;
-    //label
+    OPcode opcode;
+    size_t address1;
+    size_t address2;
+    std::string label;
 
 };
