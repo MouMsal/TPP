@@ -35,7 +35,7 @@ namespace tpp {
     }
     std::string newline = "\n";
 
-    class InputGPT { //By Mr.GPT
+    class Input { 
     public:
         template<typename T>
         InputGPT& operator>>(T& value) {
@@ -47,7 +47,7 @@ namespace tpp {
             return *this;
         }
     };
-    class Output { //Made my own version of the above for output
+    class Output { 
     public:
         template<typename T>
         Output& operator<<(const T& value) {
