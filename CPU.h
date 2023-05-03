@@ -11,15 +11,11 @@
 class CPU{
 
 private:
-    //    std::vector<Instruction> instructions;
-double regn;
-
+    double regn;
+    //    std::vector<Instruction> instructions; Unfinished
 
 
 public:
-
-//    using Instruction = void (CPU::*)();//chat
-
     template<class T>
     T load(size_t address1);
     template <class T>
@@ -27,25 +23,19 @@ public:
 
     template<class T>
     T add(T reg1, T reg2);
-
-
-//    void storeInstruction(std::function<void()> instruction);
-
-    void jump();
-    void find(int address1);
-
-
-
-    void loadInstruction();
-
-//    void multiply(T val, T val2);
-
-    template <class T> T multiply(T val, T val2);
+    template <class T>
+    T multiply(T val, T val2);
 
     float divide(float val, float val2);
 
     template<class T>
     int modulo(T val, T num);
+
+    /* Unfinished:
+    void storeInstruction(std::function<void()> instruction);
+    void jump();
+    void find(int address1);
+    void loadInstruction();*/
 };
 
 

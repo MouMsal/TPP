@@ -1,19 +1,9 @@
-
 #include "Memory.h"
 #include "CPU.h"
 
 CPU oneCPU;
 
-
 size_t Memory::address1 = 0;
-
-
-//Memory::Memory(int value,size_t& address)
-//{
-//    address1++;
-//    address = address1;
-//    oneCPU.store(value,address1);
-//}
 
 Memory::Memory(){resize(100);}
 
@@ -21,7 +11,6 @@ template <class T>
 void Memory::allocateMemory(T val, size_t &address){
     address1 += sizeof(T);
     address = address1;
-//    std::cout<<"\n"<<val;
     oneCPU.store(val,address1);
 }
 
@@ -35,11 +24,9 @@ T& Memory::getVal(size_t address){ //Returns a reference but after casting
 void Memory::resize(size_t size) {
     register1.resize(size);
 }
-
 Memory::~Memory() {}
 
-
-template int& Memory::getVal(size_t address); //Once again I have been saved by chatGPT
+template int& Memory::getVal(size_t address);
 template float& Memory::getVal(size_t address);
 template double& Memory::getVal(size_t address);
 
