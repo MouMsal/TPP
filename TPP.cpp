@@ -62,6 +62,10 @@ namespace tpp {
 
 }
 class Integer{ //
+    template <class T,class D>
+    friend T operator+(T one,D two);
+    template <class T,class D>
+    friend T operator-(T one,D two);
     friend class InputGPT;
     template <class T>
     friend bool operator!=(T one, T two);
@@ -106,6 +110,10 @@ public:
 };
 
 class Decimal {
+    template <class T,class D>
+    friend T operator+(T one,D two);
+    template <class T,class D>
+    friend T operator-(T one,D two);
     friend class InputGPT;
     template <class T>
     friend bool operator!=(T one, T two);
@@ -147,6 +155,11 @@ public:
 };
 
 class PreciseDecimal {
+    friend class InputGPT;
+    template <class T,class D>
+    friend T operator+(T one,D two);
+    template <class T,class D>
+    friend T operator-(T one,D two);
     template <class T>
     friend bool operator!=(T one, T two);
     template <class T, class D>
@@ -233,11 +246,6 @@ int main() {
     tppIF(((year%4==0 && year%100!=0)||year%400==0)) output<<" is a leap year.";
     tppELSE output<<" is not a leap year";
     END
-
-    /*
-//    test3 =  test2 / test3; ///No conversions yet made for any arithmetics
-//    tpp::disp(test3);*/
-
 }
 
 //Overloaded Functions Below
@@ -259,7 +267,23 @@ T operator+(T one,T two){
 
 }
 
-template <class T>
+template <class T,class D>
+T operator+(T one,D two){
+    typeof(one.val) three;
+    three = oneCPU.add(oneCPU.load<typeof(one.val)>(one.address)
+            ,static_cast<typeof(one.val)>(two));
+    return three;
+
+}
+
+template <class T,class D>
+T operator-(T one,D two) {
+    typeof(one.val) three;
+    three = oneCPU.add(oneCPU.load<typeof(one.val)>(one.address), static_cast<typeof(one.val)>(-two));
+    return three;
+}
+
+    template <class T>
 T operator-(T one,T two){
     typeof(one.val) three;
 

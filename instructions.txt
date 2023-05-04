@@ -1,0 +1,31 @@
+
+
+Datatypes:
+Integer (Like an int)
+Decimal (Like a float)
+PreciseDecimal (Like a double)
+
+You can do Integer x = 23; or Integer and then x = 12; or Integer(12)
+
+Output Usage:
+disp(variable or "text");
+
+//Nicer Alternate Method
+output << variable <<variable2;
+
+Input Usage:
+input >> variable;
+
+Arithmetic:
+
+Ability to multiply, add, subtract, divide, between same datatype variables; Z = X * Y
+Ability to add, subtract, ==,!= between my datatypes and a number; in form Integer - 1;     Not Reversible.
+= Should work for both within same datatypes. Integer x = Integer y (remove Integer), Integer x = 2;
+% Works for a datatype and an integer. X%12;
+
+If statements:
+
+Begins with a tppIF, if you are done you must type END. Otherwise, continue the chain with a tppELSEIF or tppELSE
+Once the chain ends, type END. you can do disp(newline) to go to a new line.
+
+It ain't much but it's honest work

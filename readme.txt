@@ -40,3 +40,6 @@ A decent amount about assembly,virtual machines, parsers, and assemblers.
 Memory Allocation and Management
 Instruction encoding
 A lot of other stuff that I can't think of at the top of my head.
+
+The challenge I had is pretty much everything I have finished which is memory and CPU. The other challenge I had is
+the fact that the project is so vague so I don't know how deep to go.
